@@ -1,0 +1,271 @@
+/* style.css */
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fcefe9;
+    /* สีพื้นหลังสว่าง ๆ คลุมโทนงานยินดี (สามารถแก้ได้) */
+    overflow: hidden;
+    /* ไม่ให้มี Scroll bars เลื่อนไปมาเพื่อคงสัดส่วนเสมือนแอป */
+    font-family: Arial, sans-serif;
+}
+
+/* Container จำกัดความกว้างเพื่อไม่ให้เพี้ยนทั้งใน PC, iPad, มือถือ */
+#app-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    /* จำกัดความกว้างสูงสุดไว้สำหรับคนเปิดบนคอมใหญ่ */
+    height: 100%;
+    margin: 0 auto;
+    /* ให้อยู่กึ่งกลางจอคอมเสมอ */
+}
+
+/* ภาพที่ "3" อยู่บริเวณกลาง-บน (ปรับได้ที่ top) */
+#image3-wrapper {
+    position: absolute;
+    top: 15%;
+    /* ความสูงจากด้านบน ปรับได้ตรงนี้เลย */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    /* ความกว้างยืดหยุ่นตามมือถือ */
+    max-width: 450px;
+    text-align: center;
+    z-index: 10;
+}
+
+#image3 {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* บริเวณซองจดหมาย (ภาพ 1 และ 2) จะอยู่ถัดจากภาพ 3 */
+#envelope-wrapper {
+    position: absolute;
+    top: 45%;
+    /* ความสูงจากด้านบน ปรับระดับได้ตรงนี้ */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    max-width: 400px;
+    z-index: 20;
+}
+
+#env-closed {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+#env-closed:hover {
+    transform: scale(1.05);
+    /* อนิเมชั่นเมาส์ชี้แล้วขยายเล็กน้อย */
+}
+
+#env-open-area {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#env-open {
+    width: 100%;
+    display: block;
+    position: relative;
+    z-index: 2;
+    /* ซองอยู่ระดับกลาง */
+    pointer-events: none;
+    /* เพื่อคลิกทะลุไปหาจดหมายด้านในได้ */
+}
+
+/* ภาพจดหมาย (ภาพ 1 ใน folder letter) */
+#letter-thumb {
+    position: absolute;
+    width: 60%;
+    /* ขนาดจดหมายเทียบกับซอง */
+    top: 30%;
+    /* ระดับกระดาษดั้งเดิมก่อนเลื่อนขึ้น */
+    z-index: 3;
+    /* ให้กระดาษโผล่มาทับหน้าซองเสมอ */
+    opacity: 0;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+/* Animation เลื่อนจดหมายขึ้นจากซอง */
+.slide-up {
+    animation: letterSlideUp 1.5s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes letterSlideUp {
+    0% {
+        transform: translateY(20%);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-45%);
+        /* จุดหมายที่เลื่อนขึ้น (ปรับตรงนี้ได้ว่าให้ลอยแค่ไหน) */
+        opacity: 1;
+    }
+}
+
+/* ปุ่ม ภาพที่ 4 และ 5 */
+#button-wrapper {
+    position: absolute;
+    top: 75%;
+    /* บริเวณกลางจอ ถัดลงมาจากจดหมาย (ปรับระดับได้ที่นี่) */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 350px;
+    text-align: center;
+    z-index: 30;
+    cursor: pointer;
+}
+
+#btn-4,
+#btn-5 {
+    width: 50%;
+    max-width: 180px;
+    margin: 0 auto;
+    height: auto;
+    display: block;
+}
+
+#gift-text {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: #e76f51;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* หน้าต่างอ่านจดหมายแบบเต็มจอ (Overlay) */
+#fullscreen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    /* สีดำโปร่งใส ให้เน้นจดหมาย */
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    /* ป้องกันการกดเมื่อมองไม่เห็น */
+    transition: opacity 0.4s ease;
+}
+
+#fullscreen-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+    /* กดได้เมื่อแสดงแล้ว */
+}
+
+#close-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+#fullscreen-img {
+    position: relative;
+    max-width: 95%;
+    max-height: 95%;
+    z-index: 101;
+    transform: scale(0.6);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+    /* นิดหน่อยเพื่อความสวยงาม */
+    cursor: pointer;
+    /* เผื่อผู้ใช้กดที่ตัวจดหมายก็ให้ปิดได้ */
+}
+
+#fullscreen-overlay.show #fullscreen-img {
+    transform: scale(1);
+}
+
+/* Container สำหรับ เงินตกลงมา */
+#money-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    /* ป้องกันไม่ให้เงินบังการคลิก */
+    z-index: 200;
+    overflow: hidden;
+}
+
+/* ธนบัตร หรือ เหรียญ แต่ละใบ */
+.money-item {
+    position: absolute;
+    top: -100px;
+    animation: fallAnimation linear forwards;
+}
+
+/* แอนิเมชันเงินตกลงมา */
+@keyframes fallAnimation {
+    0% {
+        top: -10vh;
+        opacity: 0;
+        transform: rotate(0deg) scale(0.6);
+    }
+
+    10% {
+        opacity: 1;
+        transform: rotate(30deg) scale(1);
+    }
+
+    85% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 105vh;
+        /* ลงมาจนทะลุจอด้านล่าง */
+        opacity: 0;
+        /* Fade หายเมื่อถึงท้ายสุด */
+        transform: rotate(360deg) scale(0.8);
+    }
+}

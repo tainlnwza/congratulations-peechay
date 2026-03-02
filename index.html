@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Congratulations</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app-container">
+        <!-- ภาพที่ 3: Header/Logo ตรงกลางค่อนไปด้านบน -->
+        <div id="image3-wrapper">
+            <img src="image/3.png" id="image3" alt="Congratulation Banner">
+        </div>
+
+        <!-- ซองจดหมาย: ถัดจากภาพ 3 ลงมาตรงกลาง -->
+        <div id="envelope-wrapper">
+            <img src="image/1.png" id="env-closed" alt="Closed Envelope">
+            <div id="env-open-area" style="display: none;">
+                <img src="letter/1.png" id="letter-thumb" alt="Letter Thumbnail">
+                <img src="image/2.png" id="env-open" alt="Open Envelope">
+            </div>
+        </div>
+
+        <!-- ปุ่มบริเวณกลางจอ (อยู่ถัดลงมา) จะแสดงหลังจากปิดหน้าเต็มของจดหมาย -->
+        <div id="button-wrapper" style="display: none;">
+            <img src="image/4.png" id="btn-4" alt="Button 4">
+            <img src="image/5.png" id="btn-5" alt="Button 5" style="display: none;">
+            <p id="gift-text">กดปุ่มเพื่อรับของขวัญเล็กๆน้อยๆ</p>
+        </div>
+    </div>
+
+    <!-- หน้าต่างอ่านเล็ตเตอร์แบบเต็มจอ -->
+    <div id="fullscreen-overlay" style="display: none;">
+        <div id="close-overlay"></div>
+        <img src="letter/1.png" id="fullscreen-img" alt="Fullscreen Letter">
+    </div>
+
+    <!-- คอนเทนเนอร์สำหรับใส่เงินตกลงมา -->
+    <div id="money-container"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
